@@ -30,6 +30,15 @@ const questions = [
     }
 ]
 
+function viewAllEmployees() {
+    db.query("SELECT * FROM employees", (err, results) => {
+        if (err) {
+            console.log(err);
+        }
+        console.table(results);
+    })
+}
+
 function runTask(task) {
     switch(task) {
         case "View All Employees": 
