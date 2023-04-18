@@ -101,7 +101,8 @@ function runTask(task) {
             addDepartment();
             break;
         case "Quit": 
-            //
+            db.end();
+            console.log('\n You have now exited the employee management program. \n');
             break;
     }
 }
