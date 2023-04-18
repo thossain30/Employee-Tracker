@@ -6,6 +6,7 @@ require("dotenv").config();
 const db = mysql.createConnection(
     {
         host: "localhost",
+        port: process.env.PORT || 3306,
         user: process.env.USER,
         password: process.env.PASS,
         database: "employees_db"
@@ -57,6 +58,25 @@ function viewAllDepartments() {
     })
 }
 
+function addDepartment() {
+    inquirer.prompt([
+        {
+            name: "newDept",
+            type: "input",
+            message: "What is the name of the department you'd like to add?"
+        }
+    ]).then((response) => {
+        db.query(`INSERT INTO Department SET ?`, 
+        {
+            department_name : response.newDept
+        },
+        (err, res) => {
+            if (err) {console.log(err);}
+            console.log(`\n ${response.newDept} successfully added to database! \n`);
+        })
+    })
+}
+
 function runTask(task) {
     switch(task) {
         case "View All Employees": 
@@ -78,7 +98,7 @@ function runTask(task) {
             viewAllDepartments();
             break;
         case "Add Department": 
-            //
+            addDepartment();
             break;
         case "Quit": 
             //
@@ -88,8 +108,8 @@ function runTask(task) {
 
 function init() {
     inquirer.prompt(questions).
-    then(answers => {
-        runTask(answers.task);
+    then(answer => {
+        runTask(answer.task);
     })
 }
 
