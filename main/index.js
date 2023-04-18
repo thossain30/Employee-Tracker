@@ -31,7 +31,25 @@ const questions = [
 ]
 
 function viewAllEmployees() {
-    db.query("SELECT * FROM employees", (err, results) => {
+    db.query("SELECT * FROM Employees", (err, results) => {
+        if (err) {
+            console.log(err);
+        }
+        console.table(results);
+    })
+}
+
+function viewAllRoles() {
+    db.query("SELECT * FROM Role", (err, results) => {
+        if (err) {
+            console.log(err);
+        }
+        console.table(results);
+    })
+}
+
+function viewAllDepartments() {
+    db.query("SELECT * FROM Department", (err, results) => {
         if (err) {
             console.log(err);
         }
@@ -42,7 +60,7 @@ function viewAllEmployees() {
 function runTask(task) {
     switch(task) {
         case "View All Employees": 
-            //
+            viewAllEmployees();
             break;
         case "Add Employee": 
             //
@@ -51,13 +69,13 @@ function runTask(task) {
             //
             break;
         case "View All Roles": 
-            //
+            viewAllRoles();
             break;
         case "Add Role": 
             //
             break;
         case "View All Departments": 
-            //
+            viewAllDepartments();
             break;
         case "Add Department": 
             //
