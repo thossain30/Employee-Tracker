@@ -6,7 +6,6 @@ This project allows a non-developer to store the names of employees at a company
 ## Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
-* [Contributing](#contributing)
 * [Test](#test)
 * [Questions](#questions)
 * [License](#license)
