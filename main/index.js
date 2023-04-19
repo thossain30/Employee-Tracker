@@ -3,8 +3,6 @@ const mysql = require("mysql2");
 const cTable = require("console.table");
 require("dotenv").config();
 
-console.log(process.env);
-
 const db = mysql.createConnection(
     {
         host: "localhost",
@@ -12,7 +10,7 @@ const db = mysql.createConnection(
         password: process.env.PASS, 
         database: "employees_db",
     },
-    // console.log("Connected to mysql")
+    console.log("Connected to mysql")
 );
 db.connect(function (err) {
     if (err) throw err;
