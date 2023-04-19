@@ -40,6 +40,7 @@ function viewAllEmployees() {
             console.log(err);
         }
         console.table(results);
+        init()
     })
 }
 
@@ -86,6 +87,7 @@ function addEmployee() {
                 (err, res) => {
                     if (err) console.log(err);
                     console.log(`\n ${answers.firstName} ${answers.lastName} successfully added to database! \n`);
+                    init()
                 })
             })
         })
@@ -125,6 +127,7 @@ function updateEmployeeRole() {
                 (err, res) => {
                     if (err) console.log(err)
                     console.log(`\n Successfully updated employee's role in the database! \n`)
+                    init();
                 })
             })
         })
@@ -137,6 +140,7 @@ function viewAllRoles() {
             console.log(err);
         }
         console.table(results);
+        init();
     })
 }
 
@@ -170,6 +174,7 @@ function addRole() {
             }, (err,res) => {
                 if (err) console.log(err)
                 console.log(`\n ${response.title} successfully added to database! \n`);
+                init();
             })
         }) 
     })
@@ -181,6 +186,7 @@ function viewAllDepartments() {
             console.log(err);
         }
         console.table(results);
+        init();
     })
 }
 
@@ -199,6 +205,7 @@ function addDepartment() {
         (err, res) => {
             if (err) {console.log(err);}
             console.log(`\n ${res.newDept} successfully added to database! \n`);
+            init();
         })
     })
 }
@@ -207,31 +214,24 @@ function runTask(task) {
     switch(task) {
         case "View All Employees": 
             viewAllEmployees();
-            init();
             break;
         case "Add Employee": 
             addEmployee();
-            init();
             break;
         case "Update Employee Role": 
             updateEmployeeRole();
-            init();
             break;
         case "View All Roles": 
             viewAllRoles();
-            init();
             break;
         case "Add Role": 
             addRole();
-            init();
             break;
         case "View All Departments": 
             viewAllDepartments();
-            init();
             break;
         case "Add Department": 
             addDepartment();
-            init();
             break;
         case "Quit": 
             db.end();
