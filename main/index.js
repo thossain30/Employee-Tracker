@@ -92,6 +92,45 @@ function addEmployee() {
     })
 };
 
+function updateEmployeeRole() {
+    db.query(`SELECT * FROM Roles;`, (err, res) => {
+        if (err) console.log(err);
+        let roles = res.map(role => ({name: role.title, value: role.id}));
+        db.query(`SELECT * FROM Employees;`, (err, res) => {
+            if (err) console.log(err);
+            let employees = res.map(employee => ({name: employee.first_name + ' ' + employee.last_name, value: employee.id}));
+            inquirer.prompt([
+                {
+                    name: 'employee',
+                    type: 'list',
+                    message: 'Which employee would you like to update the role for?',
+                    choices: employees
+                }, 
+                {
+                    name: 'newRole',
+                    type: 'list',
+                    message: 'What should the Employee\'s new role be?',
+                    choices: roles
+                }
+            ]).then((answers) => {
+                db.query(`UPDATE Employees SET? WHERE ?`, 
+                [
+                    {
+                        role_id: answers.newRole
+                    },
+                    {
+                        id: answers.employee
+                    }
+                ],
+                (err, res) => {
+                    if (err) console.log(err)
+                    console.log(`\n Successfully updated employee's role in the database! \n`)
+                })
+            })
+        })
+    })
+}
+
 function viewAllRoles() {
     db.query("SELECT * FROM Roles;", (err, results) => {
         if (err) {
@@ -175,7 +214,7 @@ function runTask(task) {
             init();
             break;
         case "Update Employee Role": 
-            //
+            updateEmployeeRole();
             init();
             break;
         case "View All Roles": 
