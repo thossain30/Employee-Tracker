@@ -4,9 +4,9 @@ VALUES ('Programmer'),
 ('Art'),
 ('Production'),
 ('Audio'),
-('Design')
+('Design');
 
-INSERT INTO Role (title, salary, department_id)
+INSERT INTO Roles (title, salary, department_id)
 VALUES('Gameplay Programmer', 80000, 1),
 ('Network Engineer', 80000, 1),
 ('Graphics Programmer', 100000, 1),
