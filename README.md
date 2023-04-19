@@ -20,7 +20,10 @@ Step 1: go into the main directory, Step 2: Run npm install and Step 3: Run node
 <br></br>
 
 ## Preview
-Insert video
+
+https://user-images.githubusercontent.com/54952959/232954652-e798c716-30f1-4555-84f8-2f76bd448793.mp4
+
+
 ## Questions 
 If you have any questions, contact [thossain30](https://github.com/thossain30) on Github, or reach out via email at tamjidh99@gmail.com.
 
