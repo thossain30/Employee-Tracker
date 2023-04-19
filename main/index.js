@@ -43,8 +43,57 @@ function viewAllEmployees() {
     })
 }
 
+function addEmployee() {
+    db.query(`SELECT * FROM Roles;`, (err, res) => {
+        if (err) console.log(err);
+        // Maps all roles as an array to this variable so that we can use it to prompt for role choices when adding an employee
+        let roles = res.map(role => ({name: role.title, value: role.id}));
+        db.query(`SELECT * FROM Employees;`, (err,res) => {
+            if (err) console.log(err);
+            // Maps current db of employees to this variable
+            let employees = res.map(employee => ({name: employee.first_name + ' ' + employee.last_name, value: employee.id}));
+            inquirer.prompt([
+                {
+                    name: 'firstName',
+                    type: 'input',
+                    message: 'Enter the new Employee\'s first name'
+                },
+                {
+                    name: 'lastName',
+                    type: 'input',
+                    message: 'Enter the new Employee\'s last name'
+                },
+                {
+                    name: 'role',
+                    type: 'list',
+                    message: 'Choose the new Employee\'s title',
+                    choices: roles
+                },
+                {
+                    name: 'manager',
+                    type: 'list',
+                    message: 'Choose the new Employee\'s manager',
+                    choices: employees
+                }
+            ]).then((answers) => {
+                db.query(`INSERT INTO Employees SET ?`,
+                {
+                    first_name: answers.firstName,
+                    last_name: answers.lastName,
+                    role_id: answers.role,
+                    manager_id: answers.manager
+                },
+                (err, res) => {
+                    if (err) console.log(err);
+                    console.log(`\n ${answers.firstName} ${answers.lastName} successfully added to database! \n`);
+                })
+            })
+        })
+    })
+};
+
 function viewAllRoles() {
-    db.query("SELECT * FROM Role;", (err, results) => {
+    db.query("SELECT * FROM Roles;", (err, results) => {
         if (err) {
             console.log(err);
         }
@@ -74,7 +123,7 @@ function addRole() {
                 choices: departments
             }
         ]).then((response) => {
-            db.query(`INSERT INTO Role SET ?` ,
+            db.query(`INSERT INTO Roles SET ?` ,
             {
                 title: response.title,
                 salary: response.salary,
@@ -122,7 +171,7 @@ function runTask(task) {
             init();
             break;
         case "Add Employee": 
-            //
+            addEmployee();
             init();
             break;
         case "Update Employee Role": 
