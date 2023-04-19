@@ -115,66 +115,47 @@ function addDepartment() {
     })
 }
 
-// function runTask(task) {
-//     switch(task) {
-//         case "View All Employees": 
-//             viewAllEmployees();
-//             break;
-//         case "Add Employee": 
-//             //
-//             break;
-//         case "Update Employee Role": 
-//             //
-//             break;
-//         case "View All Roles": 
-//             viewAllRoles();
-//             break;
-//         case "Add Role": 
-//             //
-//             break;
-//         case "View All Departments": 
-//             viewAllDepartments();
-//             break;
-//         case "Add Department": 
-//             addDepartment();
-//             break;
-//         case "Quit": 
-//             db.end();
-//             console.log('\n You have now exited the employee management program. \n');
-//             break;
-//     }
-// }
+function runTask(task) {
+    switch(task) {
+        case "View All Employees": 
+            viewAllEmployees();
+            init();
+            break;
+        case "Add Employee": 
+            //
+            init();
+            break;
+        case "Update Employee Role": 
+            //
+            init();
+            break;
+        case "View All Roles": 
+            viewAllRoles();
+            init();
+            break;
+        case "Add Role": 
+            addRole();
+            init();
+            break;
+        case "View All Departments": 
+            viewAllDepartments();
+            init();
+            break;
+        case "Add Department": 
+            addDepartment();
+            init();
+            break;
+        case "Quit": 
+            db.end();
+            console.log('\n You have now exited the employee management program. \n');
+            break;
+    }
+}
 
 function init() {
     inquirer.prompt(question).then
         ((answer) => {
-        switch(answer.task) {
-            case "View All Employees": 
-                viewAllEmployees();
-                break;
-            case "Add Employee": 
-                //
-                break;
-            case "Update Employee Role": 
-                //
-                break;
-            case "View All Roles": 
-                viewAllRoles();
-                break;
-            case "Add Role": 
-                addRole();
-                break;
-            case "View All Departments": 
-                viewAllDepartments();
-                break;
-            case "Add Department": 
-                addDepartment();
-                break;
-            case "Quit": 
-                db.end();
-                console.log('\n You have now exited the employee management program. \n');
-                break;
-        }
+        runTask(answer.task);
     });
 }
 
